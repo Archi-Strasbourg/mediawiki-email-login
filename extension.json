@@ -1,0 +1,13 @@
+{
+  "name": "EmailLogin",
+  "AutoloadClasses": {
+    "EmailLogin\\EmailPasswordAuthenticationProvider": "classes/EmailPasswordAuthenticationProvider.php"
+  },
+  "AuthManagerAutoConfig": {
+    "primaryauth": {
+      "EmailPasswordAuthenticationProvider": {
+        "class": "EmailLogin\\EmailPasswordAuthenticationProvider"
+      }
+    }
+  }
+}
