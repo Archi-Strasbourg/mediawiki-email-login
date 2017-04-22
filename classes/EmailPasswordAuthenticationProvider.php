@@ -7,12 +7,13 @@ use MediaWiki\Auth\AuthenticationResponse;
 use MediaWiki\Auth\LocalPasswordPrimaryAuthenticationProvider;
 use MediaWiki\Auth\PasswordAuthenticationRequest;
 
-class EmailPasswordAuthenticationProvider extends LocalPasswordPrimaryAuthenticationProvider {
-
-    public function beginPrimaryAuthentication(array $reqs) {
+class EmailPasswordAuthenticationProvider extends LocalPasswordPrimaryAuthenticationProvider
+{
+    public function beginPrimaryAuthentication(array $reqs)
+    {
         $req = AuthenticationRequest::getRequestByClass($reqs, PasswordAuthenticationRequest::class);
 
-        $dbr = wfGetDB( DB_REPLICA );
+        $dbr = wfGetDB(DB_REPLICA);
         $row = $dbr->selectRow(
             'user',
             ['user_email', 'user_name'],
@@ -23,7 +24,7 @@ class EmailPasswordAuthenticationProvider extends LocalPasswordPrimaryAuthentica
             return AuthenticationResponse::newAbstain();
         }
         $req->username = $row->user_name;
+
         return parent::beginPrimaryAuthentication([$req]);
     }
-
 }
