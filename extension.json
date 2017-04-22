@@ -2,7 +2,7 @@
   "name": "Email Login",
   "license-name": "GPL-3.0",
   "url": "https://github.com/Archi-Strasbourg/mediawiki-email-login",
-  "description": "Allow user to login with their e-mail address",
+  "description": "Allow users to login with their e-mail address",
   "version": "0.1.0",
   "author": "Pierre Rudloff",
   "AutoloadClasses": {
