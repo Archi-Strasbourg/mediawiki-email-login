@@ -14,6 +14,8 @@ define('DB_REPLICA', 0);
 
 class EmailPasswordAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
 {
+    private $provider;
+
     protected function setUp()
     {
         Mockery::mock('overload:'.AuthenticationResponse::class)
