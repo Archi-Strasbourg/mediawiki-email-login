@@ -3,12 +3,12 @@
 namespace EmailLogin\Test;
 
 use EmailLogin\EmailPasswordAuthenticationProvider;
-use Mockery;
-use phpmock\mockery\PHPMockery;
 use MediaWiki\Auth\AuthenticationRequest;
 use MediaWiki\Auth\AuthenticationResponse;
 use MediaWiki\Auth\LocalPasswordPrimaryAuthenticationProvider;
 use MediaWiki\Auth\PasswordAuthenticationRequest;
+use Mockery;
+use phpmock\mockery\PHPMockery;
 
 define('DB_REPLICA', 0);
 
