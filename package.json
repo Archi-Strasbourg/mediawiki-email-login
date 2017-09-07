@@ -1,7 +1,7 @@
 {
   "name": "mediawiki-email-login",
   "description": "MediaWiki extension that allows user to login with their e-mail address",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "Pierre Rudloff",
   "bugs": "https://github.com/Archi-Strasbourg/mediawiki-email-login/issues",
   "devDependencies": {
