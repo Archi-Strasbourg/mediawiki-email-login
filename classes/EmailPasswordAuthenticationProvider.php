@@ -13,18 +13,25 @@ class EmailPasswordAuthenticationProvider extends LocalPasswordPrimaryAuthentica
     {
         $req = AuthenticationRequest::getRequestByClass($reqs, PasswordAuthenticationRequest::class);
 
-        $dbr = wfGetDB(DB_REPLICA);
-        $row = $dbr->selectRow(
+        $dbr = wfGetDB(DB_MASTER);
+        $rows = $dbr->select(
             'user',
             ['user_email', 'user_name'],
             ['user_email' => $req->username],
             __METHOD__
         );
-        if (!$row) {
+        if ($rows->numRows() == 0) {
             return AuthenticationResponse::newAbstain();
         }
-        $req->username = $row->user_name;
+        foreach ($rows as $row) {
+            $req->username = $row->user_name;
 
-        return parent::beginPrimaryAuthentication([$req]);
+            $result = parent::beginPrimaryAuthentication([$req]);
+            if ($result->status == 'PASS') {
+                return $result;
+            }
+        }
+
+        return $result;
     }
 }
