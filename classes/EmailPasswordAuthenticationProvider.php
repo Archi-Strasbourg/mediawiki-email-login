@@ -20,9 +20,7 @@ class EmailPasswordAuthenticationProvider extends LocalPasswordPrimaryAuthentica
             ['user_email' => $req->username],
             __METHOD__
         );
-        if ($rows->numRows() == 0) {
-            return AuthenticationResponse::newAbstain();
-        }
+
         foreach ($rows as $row) {
             $req->username = $row->user_name;
 
@@ -32,6 +30,6 @@ class EmailPasswordAuthenticationProvider extends LocalPasswordPrimaryAuthentica
             }
         }
 
-        return $result;
+        return AuthenticationResponse::newAbstain();
     }
 }

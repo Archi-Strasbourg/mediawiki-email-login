@@ -10,7 +10,7 @@ use MediaWiki\Auth\PasswordAuthenticationRequest;
 use Mockery;
 use phpmock\mockery\PHPMockery;
 
-define('DB_REPLICA', 0);
+define('DB_MASTER', 0);
 
 class EmailPasswordAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
 {
@@ -21,9 +21,11 @@ class EmailPasswordAuthenticationProviderTest extends \PHPUnit_Framework_TestCas
         Mockery::mock('overload:'.AuthenticationResponse::class)
             ->shouldReceive('newAbstain')
             ->andReturn(new AuthenticationResponse());
+        $result = new AuthenticationResponse();
+        $result->status = 'PASS';
         Mockery::mock('overload:'.LocalPasswordPrimaryAuthenticationProvider::class)
             ->shouldReceive('beginPrimaryAuthentication')
-            ->andReturn(new AuthenticationResponse());
+            ->andReturn($result);
         Mockery::mock('overload:'.PasswordAuthenticationRequest::class);
         $req = new PasswordAuthenticationRequest();
         $req->username = 'foo';
@@ -33,8 +35,8 @@ class EmailPasswordAuthenticationProviderTest extends \PHPUnit_Framework_TestCas
         $row = new \StdClass();
         $row->user_name = 'foo';
         Mockery::mock('overload:DatabaseMysqli')
-            ->shouldReceive('selectRow')
-            ->andReturn(false, $row);
+            ->shouldReceive('select')
+            ->andReturn([], [$row]);
         PHPMockery::mock('EmailLogin', 'wfGetDB')->andReturn(new \DatabaseMysqli());
         $this->provider = new EmailPasswordAuthenticationProvider();
     }
