@@ -12,7 +12,10 @@
   "AuthManagerAutoConfig": {
     "primaryauth": {
       "EmailPasswordAuthenticationProvider": {
-        "class": "EmailLogin\\EmailPasswordAuthenticationProvider"
+        "class": "EmailLogin\\EmailPasswordAuthenticationProvider",
+        "services": [
+          "DBLoadBalancer"
+        ]
       }
     }
   }
