@@ -5,18 +5,24 @@
   "url": "https://github.com/Archi-Strasbourg/mediawiki-email-login",
   "description": "Allow users to login with their e-mail address",
   "version": "1.0.1",
-  "author": "Pierre Rudloff",
+  "author": [
+    "Pierre Rudloff",
+    "Anysite"
+  ],
   "AutoloadClasses": {
     "EmailLogin\\EmailPasswordAuthenticationProvider": "classes/EmailPasswordAuthenticationProvider.php"
   },
   "AuthManagerAutoConfig": {
-    "primaryauth": {
-      "EmailPasswordAuthenticationProvider": {
-        "class": "EmailLogin\\EmailPasswordAuthenticationProvider",
-        "services": [
-          "DBLoadBalancer"
-        ]
-      }
+        "primaryauth": {
+            "EmailPasswordAuthenticationProvider": {
+                "class": "EmailLogin\\EmailPasswordAuthenticationProvider",
+                "services": [
+                    "DBLoadBalancerFactory"
+                ],
+                "args": [{
+                    "authoritative": true
+                }]
+            }
+        }
     }
-  }
 }
