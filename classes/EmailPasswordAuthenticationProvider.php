@@ -13,7 +13,7 @@ class EmailPasswordAuthenticationProvider extends LocalPasswordPrimaryAuthentica
     {
         $req = AuthenticationRequest::getRequestByClass($reqs, PasswordAuthenticationRequest::class);
 
-        $dbr = wfGetDB(DB_MASTER);
+        $dbr = wfGetDB(DB_PRIMARY);
         $rows = $dbr->select(
             'user',
             ['user_email', 'user_name'],
