@@ -14,7 +14,7 @@
       "EmailPasswordAuthenticationProvider": {
         "class": "EmailLogin\\EmailPasswordAuthenticationProvider",
         "services": [
-          "DBLoadBalancer"
+          "DBLoadBalancerFactory"
         ]
       }
     }
