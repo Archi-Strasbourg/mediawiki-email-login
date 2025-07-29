@@ -6,6 +6,7 @@ use MediaWiki\Auth\AuthenticationRequest;
 use MediaWiki\Auth\AuthenticationResponse;
 use MediaWiki\Auth\LocalPasswordPrimaryAuthenticationProvider;
 use MediaWiki\Auth\PasswordAuthenticationRequest;
+use MediaWiki\MediaWikiServices;
 
 class EmailPasswordAuthenticationProvider extends LocalPasswordPrimaryAuthenticationProvider
 {
@@ -13,7 +14,7 @@ class EmailPasswordAuthenticationProvider extends LocalPasswordPrimaryAuthentica
     {
         $req = AuthenticationRequest::getRequestByClass($reqs, PasswordAuthenticationRequest::class);
 
-        $dbr = wfGetDB(DB_MASTER);
+        $dbr = MediaWikiServices::getInstance()->getConnectionProvider()->getPrimaryDatabase();
         $rows = $dbr->select(
             'user',
             ['user_email', 'user_name'],
